@@ -26,16 +26,12 @@ export default class Matrix extends Component {
     this.props.values.map((rowVals, idx) => <div key={idx} className="row">{this.genRow(rowVals)}</div>)
   )
 
-  handleClick = (event) => {
-    console.log(event.target)
-  }
-
   render() {
     console.log(this.state)
     return (
       <div id="app">
         <ColorSelector setSelectedColor={this.setSelectedColor}/>
-        <div onClick={this.handleClick} id="matrix">
+        <div id="matrix">
           {this.genMatrix()}
         </div>
       </div>
