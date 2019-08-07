@@ -6,23 +6,36 @@ import ColorSelector from './ColorSelector.js'
 export default class Matrix extends Component {
 
   constructor() {
-    super()
+    super();
+    this.state = {
+      selectedColor: '#FFF'
+    }
   }
 
+  setSelectedColor = (newColor) => {
+    this.setState({selectedColor: newColor})
+  }
+
+  getSelectedColor = () => (this.state.selectedColor);
+
   genRow = (vals) => (
-    vals.map((val, idx) => <Cell key={idx} color={val} />)
+    vals.map((val, idx) => <Cell key={idx} color={val} getSelectedColor={this.getSelectedColor}/>)
   )
 
   genMatrix = () => (
     this.props.values.map((rowVals, idx) => <div key={idx} className="row">{this.genRow(rowVals)}</div>)
   )
 
+  handleClick = (event) => {
+    console.log(event.target)
+  }
 
   render() {
+    console.log(this.state)
     return (
       <div id="app">
-        <ColorSelector />
-        <div id="matrix">
+        <ColorSelector setSelectedColor={this.setSelectedColor}/>
+        <div onClick={this.handleClick} id="matrix">
           {this.genMatrix()}
         </div>
       </div>
